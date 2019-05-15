@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+public class Market 
+{
+
+	public ArrayList<Stock> m = new ArrayList<Stock>();
+	
+	public ArrayList<Transaction> forSaleMarket = new ArrayList<Transaction>();
+	
+	public Market(int sizeofMarket) 
+	{
+		for(int i = 0; i <= sizeofMarket; i++)               //regular loop, emphasis on the index i
+		{
+			Stock a = new Stock();
+			m.add(a);
+		}
+	}
+	
+	public void printMarket()
+	{
+		for(Stock st : m)                              //enhanced for loop, emphasizes array traversal	
+		{
+			System.out.println("stock symbol: " + st.symbol + " @ price $" + st.price);
+		}
+	}
+	
+	
+}
