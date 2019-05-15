@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+public class BrainCenter 
+{
+//	public Market market;	
+	public static void main(String[] args) 
+	{
+		Market market = new Market(6000);					
+		for(int i = 0; i <= 10; i++)
+		{
+			Buyer b = new Buyer();
+			try
+			{
+				market = b.buildRandomPortfolio(market);
+			}catch(Exception e)
+			{
+				if(e.getMessage() != null)
+				{
+					System.out.println("exception " + e.getMessage());
+				}
+			}
+		}
+		
+		try
+		{
+			System.out.println("for sale market contains:");
+			for(Transaction t : market.forSaleMarket)
+			{
+				System.out.println("transaction " + t.buyerName + " holds " + t.numStockPurchased + " of " + t.symbol + " @ $" + t.price);
+			}
+		}catch(Exception e)
+		{
+			if(e.getMessage() != null)
+			{
+				System.out.println("exception " + e.getMessage());
+			}
+		}
+		
+	}
+}
