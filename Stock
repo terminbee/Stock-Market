@@ -1,0 +1,175 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+
+public class Stock 
+{
+
+		public String symbol;
+		public double price;
+		public int ipoQty; 		
+		private String industry;
+		ArrayList<Double> priceHistory = new ArrayList<Double>();
+		
+	
+	
+		public Stock() 
+		{
+			setIndustry(); //strings are words, which should be put in "quotes"
+		
+			setStockPrice();
+		
+			ipoQty = setipoQty();
+			
+			symbol = setSymbol(); //we will later have random symbol names
+		}
+		
+		public void displayPriceHistory()
+		{
+			for(Double h : priceHistory)
+			{
+				System.out.println("$" + h);
+			}
+		}
+		
+	private String setSymbol() 
+	{
+			String returnValue = "";
+	
+			for(int i  = 0; i < 4; i++)
+			{
+				String a = getRandomLetter();
+				returnValue = returnValue + a;
+			}
+			return returnValue;
+	}
+	
+	private String getRandomLetter() 
+	{
+			String result = "";
+			Random r = new Random();
+			char c = (char)(r.nextInt(26) + 'A');
+			result = String.valueOf(c);
+			
+			return result;
+	}
+	
+			public void printPriceandipoQty()
+			{
+				System.out.println("Price is now " + price);
+				System.out.println();
+				System.out.println("IPO quantity is now " + ipoQty);
+			}
+			
+			private void setStockPrice() 
+			{
+				Random priceno = new Random();
+				price = priceno.nextInt(100); 
+				if(price < 0)
+				{
+					price = price * -1;
+				}
+			}
+			
+			
+			public String getIndustry() {
+				return industry;
+			}
+	
+			
+			public void setIndustry() 
+			{
+				Random r = new Random();
+				int l = r.nextInt(100); 
+				
+				if(l < 5)
+				{
+					this.industry = "fishing";
+				}
+				else if(l < 10 && l > 5)
+				{
+					this.industry = "telecom";
+				}
+				else if(l < 15 && l > 10)
+				{
+					this.industry = "automobiles";
+				}
+				else if(l < 20 && l > 15)
+				{
+					this.industry = "housing";
+				}
+				else if(l < 25 && l > 20)
+				{
+					this.industry = "water";
+				}
+				else if(l < 30 && l > 25)
+				{
+					this.industry = "mining";
+				}
+				else if(l < 35 && l > 30)
+				{
+					this.industry = "agriculture";
+				}
+				else if(l < 40 && l > 35)
+				{
+					this.industry = "cinema";
+				}
+				else if(l < 45 && l > 40)
+				{
+					this.industry = "whaling";
+				}
+				else if(l < 50 && l > 45)
+				{
+					this.industry = "computers";
+				}
+				else if(l < 55 && l > 50)
+				{
+					this.industry = "toys";
+				}
+				else if(l < 60 && l > 55)
+				{
+					this.industry = "mobile phones";
+				}
+				else if(l < 65 && l > 60)
+				{
+					this.industry = "bicycles";
+				}
+				else if(l < 70 && l > 65)
+				{
+					this.industry = "pets";
+				}
+				else if(l < 75 && l > 70)
+				{
+					this.industry = "shoes";
+				}
+				else if(l < 80 && l > 75)
+				{
+					this.industry = "livestock";
+				}
+				else if(l < 85 && l > 80)
+				{
+					this.industry = "denim";
+				}
+				else if(l < 90 && l > 85)
+				{
+					this.industry = "banking";
+				}
+				else if(l < 95 && l > 90)
+				{
+					this.industry = "furniture";
+				}
+				else
+				{
+					this.industry = "education";
+				}
+				
+			}
+	
+			private int setipoQty()
+			{
+				int rv = 0;
+				Random r = new Random();
+				rv = r.nextInt(15000000);
+				return rv;	
+			}
+	}
