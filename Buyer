@@ -1,0 +1,116 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+
+public class Buyer 
+{
+	public double budget; 
+	public int name;      
+	int numTransactions;  
+	double apt;           
+	Portfolio p;
+	Market market;
+	
+	public Buyer() 
+	{
+		establishBuyerName();
+		establishBudget();		
+		proveEstablishment();
+		establishNumberOfTranscations();
+		establishAPT();
+		p = new Portfolio();
+	}
+	
+	private void establishBuyerName()
+	{
+		Random r = new Random();
+		name = r.nextInt(1000000);
+	}
+	
+	private void establishBudget()
+	{
+		Random r = new Random();
+		budget = r.nextInt() / 10;
+		budget = Math.abs(budget);
+		System.out.println("budget is set to " + budget);
+	}
+	
+	private void establishNumberOfTranscations()
+	{
+		Random r = new Random();
+		numTransactions = r.nextInt(25);
+		System.out.println("num transactions = " + numTransactions);
+	}
+	
+	private void establishAPT()
+	{
+		apt = budget / numTransactions;
+		System.out.println("apt is " + apt);
+	}
+	
+	
+	public Market buildRandomPortfolio(Market market)
+	{
+		for(int i = 0; i < numTransactions; i++)
+		{
+			Random r = new Random();
+			int ind = r.nextInt(6000);
+			Stock a = market.m.get(ind); //gets a random stock from 6000 stocks
+			System.out.println("Random stock details for stock " + ind + " is " + a.symbol + " @ $" + a.price);
+			
+			Transaction t = new Transaction();
+			t.price = a.price;
+			t.symbol = a.symbol;
+			t.numStockPurchased = (int) (apt / t.price);
+			t.buyerName = name;
+			p.add(t);
+			
+			Random newPrice = new Random();
+			a.price = a.price + newPrice.nextDouble();
+			a.priceHistory.add(a.price);
+			a.displayPriceHistory();
+						
+		}
+		Market a = sellOffWinners(market);
+		return a;
+	}
+	
+	public void proveEstablishment()
+	{
+		System.out.println("buyer " + name + " has a budget of $" + budget);
+	}
+
+	public Market sellOffWinners(Market market) 
+	{
+		try
+		{
+			System.out.println("Working up to here 1");
+			for(Transaction t : p.portfolio)
+			{
+				System.out.println("Working up to here 2");
+				for(Stock a : market.m)
+				{
+					if(t.symbol.equalsIgnoreCase(a.symbol))
+					{
+						if(t.price < a.price)              
+						{
+							market.forSaleMarket.add(t);
+							System.out.println("just put up a transaction for sale");
+						}
+						else
+						{
+							System.out.println("Sorry, not for sale right now");
+						}
+					}
+				}
+			}
+		}catch(Exception e)
+		{
+			if(e.getMessage() != null)
+			{
+				System.out.println("exception " + e.getMessage());
+			}
+		}
+		return market;
+	}
+}
