@@ -1,0 +1,14 @@
+
+public class Transaction // needs a symbol (String), price (double), numStockPurchased (int)
+{
+	public int buyerName;
+	String symbol;
+	double price;
+	int numStockPurchased; 
+	
+	public Transaction()
+	{
+		
+	}
+
+}
