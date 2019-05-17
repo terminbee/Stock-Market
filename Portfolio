@@ -1,19 +1,10 @@
 import java.util.ArrayList;
 public class Portfolio 
 {
-
-	public ArrayList<Transaction> portfolio = new ArrayList<Transaction>();
-
-	public void add(Transaction t) 
-	{
-		
-	}
-	
+	ArrayList<Transaction> portfolio;
 
 	
 	
-	
-
 	
 
 
