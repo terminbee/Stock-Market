@@ -9,6 +9,7 @@ public class Buyer
 	int numTransactions;  
 	double apt;           
 	Portfolio p;
+	public ArrayList<Transaction> portfolio = new ArrayList<Transaction>();
 	Market market;
 	
 	public Buyer() 
@@ -16,9 +17,8 @@ public class Buyer
 		establishBuyerName();
 		establishBudget();		
 		proveEstablishment();
-		establishNumberOfTranscations();
+		establishNumberOfTransactions();
 		establishAPT();
-		p = new Portfolio();
 	}
 	
 	private void establishBuyerName()
@@ -35,7 +35,7 @@ public class Buyer
 		System.out.println("budget is set to " + budget);
 	}
 	
-	private void establishNumberOfTranscations()
+	private void establishNumberOfTransactions()
 	{
 		Random r = new Random();
 		numTransactions = r.nextInt(25);
@@ -63,7 +63,7 @@ public class Buyer
 			t.symbol = a.symbol;
 			t.numStockPurchased = (int) (apt / t.price);
 			t.buyerName = name;
-			p.add(t);
+			portfolio.add(t);
 			
 			Random newPrice = new Random();
 			a.price = a.price + newPrice.nextDouble();
@@ -71,8 +71,8 @@ public class Buyer
 			a.displayPriceHistory();
 						
 		}
-		Market a = sellOffWinners(market);
-		return a;
+		Market l = sellOffWinners(market);
+		return l;
 	}
 	
 	public void proveEstablishment()
@@ -84,12 +84,11 @@ public class Buyer
 	{
 		try
 		{
-			System.out.println("Working up to here 1");
-			for(Transaction t : p.portfolio)
+			for(Stock a : market.m)
 			{
-				System.out.println("Working up to here 2");
-				for(Stock a : market.m)
+				for(Transaction t : this.portfolio)
 				{
+					
 					if(t.symbol.equalsIgnoreCase(a.symbol))
 					{
 						if(t.price < a.price)              
