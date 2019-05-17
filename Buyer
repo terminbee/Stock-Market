@@ -86,7 +86,7 @@ public class Buyer
 		{
 			for(Stock a : market.m)
 			{
-				for(Transaction t : this.portfolio)
+				for(Transaction t : portfolio)
 				{
 					
 					if(t.symbol.equalsIgnoreCase(a.symbol))
